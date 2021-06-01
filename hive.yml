@@ -2,7 +2,6 @@
 ### template entries only
 ### pls place this file under /data/hive
 #######################################
-password: 1234
 num_nodes: 61
 versions:
   clef: '0.4.12'
