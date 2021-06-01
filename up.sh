@@ -10,11 +10,11 @@ $VENV .virtualenv
 source ./.virtualenv/bin/activate
 
 # Install the requirements
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 # Now, generate all the files, including deploy.sh
 HIVE_YAML=/data/hive/hive.yml
-[ -f "$HIVE_YAML" ] || echo "no hive.yml found in /data/hive" && exit 1
+[ ! -f "$HIVE_YAML" ] || echo "no hive.yml found in /data/hive" && exit 1
 
 python build.py $HIVE_YAML
 

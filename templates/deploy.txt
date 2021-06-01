@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Create the root directory and geth / metrics directories
-sudo mkdir {{ paths.root }}
-sudo mkdir {{ paths.root }}/{ethereum,prometheus}
+sudo mkdir -p {{ paths.root }}
+sudo mkdir -p {{ paths.root }}/{ethereum,prometheus}
 
 # Create all the data directories for the bees to store their tasty honey
 {% for i in range(num_nodes) %}
