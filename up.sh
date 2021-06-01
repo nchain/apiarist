@@ -2,6 +2,7 @@
 
 # Make sure submodules etc are updated.
 git submodule update --init --recursive
+docker container prune
 
 VENV=$(which virtualenv)
 
