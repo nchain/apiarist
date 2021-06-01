@@ -6,7 +6,7 @@ sudo mkdir -p {{ paths.root }}/{ethereum,prometheus}
 
 # Create all the data directories for the bees to store their tasty honey
 {% for i in range(num_nodes) %}
-sudo mkdir {{ paths.root }}/bee-{{ loop.index }}
+sudo mkdir -p {{ paths.root }}/bee-{{ loop.index }}
 sudo chown 999:999 {{ paths.root }}/bee-{{ loop.index }}
 sudo chmod 755 {{ paths.root }}/bee-{{ loop.index }}
 {% endfor %}
