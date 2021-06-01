@@ -8,39 +8,44 @@ from eth_account import Account
 from datetime import datetime
 import time
 import json
+import sys
+import yaml
 
+HIVE_YAML = sys.argv[1]
+with open(HIVE_YAML, 'r') as f:
+    hiveYaml = yaml.load(f, Loader=yaml.FullLoader)
 
 # Number of bees at the queen's service should she choose.
-num_nodes = 61
+num_nodes = hiveYaml['num_nodes']
 
 # Every bee has it's day
 versions = {
-    'clef': '0.4.12',
-    'bee': '0.6.2',
-    'geth': 'v1.10.2'
+    'clef': hiveYaml['versions']['clef'],
+    'bee': hiveYaml['versions']['bee'],
+    'geth': hiveYaml['versions']['geth']
 }
 
 # Where do we keep the sweet honey
 paths = {
-    'root': '/data/hive',
+    'root': hiveYaml['root_path'],
 }
 
 # The clef password - used to encrypt new ethereum accounts.
 # WARNING: THIS MUST BE AT LEAST 10 CHARACTERS LONG.
 #          REFER TO https://geth.ethereum.org/docs/getting-started
 clef = {
-    'password': 'mypassword'
+    'password': hiveYaml['clef_password']
 }
 
 # Network port settings - let's make it easier to share pollen!
 network = {
-    'base_host_port': 1633,
-    'base_external_port': 31000,
-    'host_ip_addr': "51.89.217.19",
-    'external_ip_addr': "51.89.217.19",
-    'grafana_port': 3000,
-    'geth_http_port': 8545,
-    'geth_ws_port': 8546,
+    'base_host_port': hiveYaml['base_host_port'],
+    'base_external_port': hiveYaml['base_external_port'],
+    'host_ip_addr': hiveYaml['host_ip_addr'],
+    'external_ip_addr': hiveYaml['external_ip_addr'],
+    'grafana_port': hiveYaml['grafana_port'],
+    'geth_http_port': hiveYaml['geth_http_port'],
+    'geth_ws_port': hiveYaml['geth_ws_port'],
 }
 
 

@@ -56,7 +56,7 @@ clef = {
 network = {
     'base_host_port': 1633,
     'base_external_port': 31000,
-    'host_ip_addr': "192.168.1.100",         # Docker host's IP address.
+    'host_ip_addr': "172.19.0.1",         # Docker host's IP address.
     'external_ip_addr': "199.199.199.199",   # External IP address.
     'grafana_port': 3000,
     'geth_http_port': 8545,
