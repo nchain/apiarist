@@ -14,8 +14,9 @@ source ./.virtualenv/bin/activate
 pip3 install -r requirements.txt
 
 # Now, generate all the files, including deploy.sh
-HIVE_YAML=/data/hive/hive.yml
-[ ! -f "$HIVE_YAML" ] && echo "no hive.yml found in /data/hive" && exit 1
+HIVE_YAML=$1
+[ -z "$HIVE_YAML" ] && HIVE_YAML="~/.hive.yml"
+[ ! -f "$HIVE_YAML" ] && echo ".hive.yml not found" && exit 1
 
 python build.py $HIVE_YAML
 
