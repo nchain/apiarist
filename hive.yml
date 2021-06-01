@@ -11,8 +11,8 @@ root_path: /data/hive
 clef_password: 123456
 base_host_port: 1633
 base_external_port: 31000
-host_ip_addr: 51.89.217.19
-external_ip_addr: 51.89.217.19
+host_ip_addr: 192.17.0.1
+external_ip_addr: 8.8.8.8
 grafana_port: 3000
 geth_http_port: 8545
 geth_ws_port: 8546
