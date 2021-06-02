@@ -48,8 +48,17 @@ network = {
     'geth_ws_port': hiveYaml['geth_ws_port'],
 }
 
-containers = hiveYaml['containers']
-
+containers = {
+    'prometheus': hiveYaml['containers']['prometheus'],
+    'cadvisor': hiveYaml['containers']['cadvisor'],
+    'node-exporter': hiveYaml['containers']['node-exporter'],
+    'alertmanager': hiveYaml['containers']['alertmanager'],
+    'grafana': hiveYaml['containers']['grafana'],
+    'geth-goerli': hiveYaml['containers']['geth-goerli'],
+    'geth-goerli-exporter': hiveYaml['containers']['geth-goerli-exporter'],
+    'clef': hiveYaml['containers']['clef'],
+    'bees': hiveYaml['containers']['bees'],
+}
 # First let's go through and generate all the Ethereum accounts for the
 # nodes.
 Account.enable_unaudited_hdwallet_features()
