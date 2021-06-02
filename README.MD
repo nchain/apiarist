@@ -1,4 +1,4 @@
-# Apiarist
+# Beehive automation scripts
 
 Those that have been active in the [Ethereum Swarm](https://swarm.ethereum.org)
 for a while have come to know the desire to scale their hives 🐝, in effect
