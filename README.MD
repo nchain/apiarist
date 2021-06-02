@@ -52,7 +52,7 @@ external_ip_addr: 8.8.8.8   # External IP address.
 grafana_port: 3000
 geth_http_port: 8545
 geth_ws_port: 8546
-containers:           #whether to deploy the corresponding containers or not
+containers:                 #whether to deploy the corresponding containers or not
   prometheus: true
   cadvisor: true
   node-exporter: true

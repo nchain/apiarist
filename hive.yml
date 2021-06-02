@@ -27,3 +27,8 @@ containers:
   geth-goerli-exporter: true
   clef: true
   bees: true
+host_pub_ips:
+  - ipv4_1
+  - ipv4_2
+  - ipv4_3
+  - ...
