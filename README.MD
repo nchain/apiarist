@@ -29,39 +29,40 @@ Use of this repository requires the following dependencies:
 
 ## Configuration
 
-All configuration is handled in `build.py` in easily digestible variable
+All configuration is handled in `hive.yml` in easily digestible variable
 names:
 
 ```python
-# Every bee has it's day
-versions = {
-    'clef': '0.4.12',
-    'bee': '0.6.1',
-    'geth': 'v1.10.2'
-}
 
-# Where do we keep the sweet honey. This best be an SSD with enough storage
-# space for all and plenty of IOPs.
-paths = {
-    'root': '/var/hive',
-}
+num_nodes: 61               # number of bee nodes you wanna run within a sigle host machine
+versions:                   # Every bee has it's day
+  clef: '0.4.12'
+  bee: '0.6.2'
+  geth: 'v1.10.2'
+root_path: /data/hive       # Where do we keep the sweet honey. This best be an SSD with enough storage
+                            # space for all and plenty of IOPs
+clef_password: 123456       # The clef password - used to encrypt new ethereum accounts. Make this a 
+                            # good password!
+                            #
+                            # Network port settings - let's make it easier to share pollen!
+base_host_port: 1633
+base_external_port: 31000
+host_ip_addr: 192.17.0.1    # Docker host's IP address.
+external_ip_addr: 8.8.8.8   # External IP address.
+grafana_port: 3000
+geth_http_port: 8545
+geth_ws_port: 8546
+containers:           #whether to deploy the corresponding containers or not
+  prometheus: true
+  cadvisor: true
+  node-exporter: true
+  alertmanager: true
+  grafana: true
+  geth-goerli: true
+  geth-goerli-exporter: true
+  clef: true
+  bees: true
 
-# The clef password - used to encrypt new ethereum accounts. Make this a 
-# good password!
-clef = {
-    'password': 'passwordhere'
-}
-
-# Network port settings - let's make it easier to share pollen!
-network = {
-    'base_host_port': 1633,
-    'base_external_port': 31000,
-    'host_ip_addr': "172.19.0.1",         # Docker host's IP address.
-    'external_ip_addr': "199.199.199.199",   # External IP address.
-    'grafana_port': 3000,
-    'geth_http_port': 8545,
-    'geth_ws_port': 8546,
-}
 ```
 
 ## Deploying
