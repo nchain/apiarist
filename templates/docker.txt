@@ -80,6 +80,7 @@ services:
 {% if containers.geth_goerli %}
   geth-goerli:
     image: ethereum/client-go:{{ versions.geth }}
+    container_name: geth-goerli
     ports:
       - {{ network.geth_http_port }}:8545
       - {{ network.geth_ws_port }}:8546
@@ -116,6 +117,7 @@ services:
 {% if containers.clef %}
   clef:
     image: ethersphere/clef:{{ versions.clef }}
+    container_name: clef
     restart: unless-stopped
     networks:
       - bee_hive
@@ -136,6 +138,7 @@ services:
 {% set nat_addr = loop.index0 + network.base_external_port %}
   bee-{{ loop.index }}:
     image: ethersphere/bee:{{ versions.bee }}
+    container_name: bee-{{ loop.index }}
     restart: unless-stopped
     networks:
       - bee_hive
