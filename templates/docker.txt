@@ -1,5 +1,6 @@
-version: '3.2'
+version: '3.4'
 services:
+{% if containers.prometheus %}
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
@@ -12,6 +13,9 @@ services:
       - {{ paths.root }}/prometheus:/prometheus
     depends_on:
       - cadvisor
+{% endif %}
+
+{% if containers.cadvisor %}
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
@@ -22,6 +26,9 @@ services:
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
+{% endif %}
+
+{% if containers.node-exporter %}
   node-exporter:
     image: prom/node-exporter:latest
     volumes:
@@ -35,6 +42,9 @@ services:
       - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
     ports:
       - 9100:9100
+{% endif %}
+
+{% if containers.alertmanager %}
   alertmanager:
     image: prom/alertmanager:latest
     ports:
@@ -47,6 +57,9 @@ services:
       - '--storage.path=/alertmanager'
     depends_on:
       - prometheus
+{% endif %}
+
+{% if containers.grafana %}
   grafana:
     image: grafana/grafana:latest
     depends_on:
@@ -58,6 +71,9 @@ services:
     env_file:
       - ./grafana/config.monitoring
     restart: always
+{% endif %}
+
+{% if containers.geth-goerli %}
   geth-goerli:
     image: ethereum/client-go:{{ versions.geth }}
     ports:
@@ -78,6 +94,9 @@ services:
       - '--ws'
       - '--ws.addr=0.0.0.0'
       - '--metrics'
+{% endif %}
+
+{% if containers.geth-goerli-exporter %}
   geth-goerli-exporter:
     image: hunterlong/gethexporter:latest
     ports:
@@ -86,6 +105,9 @@ services:
       - GETH=http://geth-goerli:8545
     depends_on:
       - geth-goerli
+{% endif %}
+
+{% if containers.clef %}
   clef:
     image: ethersphere/clef:{{ versions.clef }}
     restart: unless-stopped
@@ -96,6 +118,8 @@ services:
     volumes:
       - {{ paths.root }}/clef:/app/data
     command: full
+{% endif %}
+
 {% for account in accounts %}
 {% set api_addr = (loop.index0 * 3) + network.base_host_port %}
 {% set p2p_addr = api_addr + 1 %}

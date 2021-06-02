@@ -1,7 +1,8 @@
-#######################################
+################################################
 ### template entries only
-### pls place this file under /data/hive
-#######################################
+### pls update and save this file as 
+###         ~/.hive.yml
+################################################
 num_nodes: 61
 versions:
   clef: '0.4.12'
@@ -16,3 +17,12 @@ external_ip_addr: 8.8.8.8
 grafana_port: 3000
 geth_http_port: 8545
 geth_ws_port: 8546
+containers:
+  prometheus: true
+  cadvisor: true
+  node-exporter: true
+  alertmanager: true
+  grafana: true
+  geth-goerli: true
+  geth-goerli-exporter: true
+  clef: true
