@@ -13,7 +13,7 @@ sudo chmod 755 {{ paths.root }}/bee-{{ loop.index }}
 
 # Let's setup clef to make sure it does it's job co-ordinating for our bees
 sudo mkdir -p {{ paths.root }}/clef/keystore
-[ -f "UTC*" ] && sudo mv UTC* {{ paths.root }}/clef/keystore/
+sudo mv ./UTC* {{ paths.root }}/clef/keystore/
 sudo cp password {{ paths.root }}/clef/password
 sudo chown 65534:0 -R {{ paths.root }}/clef
 sudo chmod 750 {{ paths.root }}/clef

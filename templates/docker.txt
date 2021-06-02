@@ -1,4 +1,8 @@
 version: '3.4'
+networks:
+  bee_hive:
+    external: true
+
 services:
 {% if containers.prometheus %}
   prometheus:
@@ -83,6 +87,8 @@ services:
     volumes:
       - {{ paths.root }}/ethereum:/root/.ethereum
     restart: always
+    networks:
+      - bee_hive
     command:
       - '--goerli'
       - '--syncmode=light'
@@ -111,6 +117,8 @@ services:
   clef:
     image: ethersphere/clef:{{ versions.clef }}
     restart: unless-stopped
+    networks:
+      - bee_hive
     ports:
       - 8550:8550
     environment:
@@ -129,6 +137,8 @@ services:
   bee-{{ loop.index }}:
     image: ethersphere/bee:{{ versions.bee }}
     restart: unless-stopped
+    networks:
+      - bee_hive
     environment:
       - BEE_CLEF_SIGNER_ETHEREUM_ADDRESS={{ account.address[2:]|lower }}
       - BEE_NAT_ADDR=:{{ nat_addr }}
