@@ -4,11 +4,11 @@
 sudo mkdir -p {{ paths.root }}
 
 {% if containers.geth_goerli %}
-sudo mkdir -p {{ paths.root }}/{ethereum}
+sudo mkdir -p {{ paths.root }}/ethereum
 {% endif %}
 
 {% if containers.prometheus %}
-sudo mkdir -p {{ paths.root }}/{prometheus}
+sudo mkdir -p {{ paths.root }}/prometheus
 {% endif %}
 
 # Create all the data directories for the bees to store their tasty honey
