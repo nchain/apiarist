@@ -2,7 +2,14 @@
 
 # Create the root directory and geth / metrics directories
 sudo mkdir -p {{ paths.root }}
-sudo mkdir -p {{ paths.root }}/{ethereum,prometheus}
+
+{% if containers.geth_goerli %}
+sudo mkdir -p {{ paths.root }}/{ethereum}
+{% endif %}
+
+{% if containers.prometheus %}
+sudo mkdir -p {{ paths.root }}/{prometheus}
+{% endif %}
 
 # Create all the data directories for the bees to store their tasty honey
 {% for i in range(num_nodes) %}
@@ -12,6 +19,7 @@ sudo chmod 755 {{ paths.root }}/bee-{{ loop.index }}
 {% endfor %}
 
 # Let's setup clef to make sure it does it's job co-ordinating for our bees
+{% if containers.clef %}
 sudo mkdir -p {{ paths.root }}/clef/keystore
 sudo mv ./UTC* {{ paths.root }}/clef/keystore/
 sudo cp password {{ paths.root }}/clef/password
@@ -19,8 +27,8 @@ sudo chown 65534:0 -R {{ paths.root }}/clef
 sudo chmod 750 {{ paths.root }}/clef
 sudo sh -c "chmod -R 0600 {{ paths.root }}/clef/keystore/UTC*"
 sudo sh clef.sh
-
 sudo mv password {{ paths.root }}/password
+{% endif %}
 
 # Setup permissions for metrics gathering
 sudo chown 65534:65534 {{ paths.root }}/prometheus
