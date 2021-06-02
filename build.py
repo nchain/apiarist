@@ -54,7 +54,7 @@ containers = {
     'node_exporter': hiveYaml['containers']['node-exporter'],
     'alertmanager': hiveYaml['containers']['alertmanager'],
     'grafana': hiveYaml['containers']['grafana'],
-    'gethgoerli': hiveYaml['containers']['geth-goerli'],
+    'geth_goerli': hiveYaml['containers']['geth-goerli'],
     'geth_goerli_exporter': hiveYaml['containers']['geth-goerli-exporter'],
     'clef': hiveYaml['containers']['clef'],
     'bees': hiveYaml['containers']['bees'],
