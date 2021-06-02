@@ -28,7 +28,7 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
 {% endif %}
 
-{% if containers.node-exporter %}
+{% if containers.node_exporter %}
   node-exporter:
     image: prom/node-exporter:latest
     volumes:
@@ -73,7 +73,7 @@ services:
     restart: always
 {% endif %}
 
-{% if containers.geth-goerli %}
+{% if containers.geth_goerli %}
   geth-goerli:
     image: ethereum/client-go:{{ versions.geth }}
     ports:
@@ -96,7 +96,7 @@ services:
       - '--metrics'
 {% endif %}
 
-{% if containers.geth-goerli-exporter %}
+{% if containers.geth_goerli_exporter %}
   geth-goerli-exporter:
     image: hunterlong/gethexporter:latest
     ports:
