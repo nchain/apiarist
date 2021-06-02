@@ -48,6 +48,7 @@ network = {
     'geth_ws_port': hiveYaml['geth_ws_port'],
 }
 
+containers = hiveYaml['containers']
 
 # First let's go through and generate all the Ethereum accounts for the
 # nodes.
@@ -83,7 +84,7 @@ def process(input, output):
 
     rendered = template.render(
         num_nodes=num_nodes, paths=paths, clef=clef, network=network,
-        versions=versions, accounts=accounts
+        versions=versions, accounts=accounts, containers=containers
     )
 
     with open(output, 'w') as f:
