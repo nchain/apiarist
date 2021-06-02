@@ -120,6 +120,7 @@ services:
     command: full
 {% endif %}
 
+{% if containers.bees %}
 {% for account in accounts %}
 {% set api_addr = (loop.index0 * 3) + network.base_host_port %}
 {% set p2p_addr = api_addr + 1 %}
@@ -181,3 +182,4 @@ services:
     depends_on:
       - clef
 {% endfor %}
+{% endif %}

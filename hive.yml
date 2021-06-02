@@ -26,3 +26,4 @@ containers:
   geth-goerli: true
   geth-goerli-exporter: true
   clef: true
+  bees: true
