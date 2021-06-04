@@ -16,7 +16,7 @@ pip3 install -r requirements.txt
 # Now, generate all the files, including deploy.sh
 HIVE_YAML=$1
 [ -z "$HIVE_YAML" ] && HIVE_YAML="$HOME/.hive.yml"
-[ ! -f "$HIVE_YAML" ] && echo "~/.hive.yml not found" && exit 1
+[ ! -f "$HIVE_YAML" ] && echo "$HOME/.hive.yml not found" && exit 1
 
 python build.py $HIVE_YAML
 
