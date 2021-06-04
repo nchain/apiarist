@@ -32,11 +32,11 @@ fi
 pretty_address = {{ account.address[2:].lower() }}
 num=$(sudo ls -l "$DATA/keystore/" | grep $pretty_address | wc -l)
 if "$num" -eq 0; then
-    sudo docker run -i --entrypoint="" -v $DATA:/app/data $IMAGE $CLEF --configdir "/app/data" --keystore /app/data/keystore --stdio-ui setpw {{ account.address|lower }} >/dev/null 2>&1 << EOF
-    $SECRET
-    $SECRET
-    $SECRET
-    EOF
+sudo docker run -i --entrypoint="" -v $DATA:/app/data $IMAGE $CLEF --configdir "/app/data" --keystore /app/data/keystore --stdio-ui setpw {{ account.address|lower }} >/dev/null 2>&1 << EOF
+$SECRET
+$SECRET
+$SECRET
+EOF
 fi
 {% endfor %}
 
