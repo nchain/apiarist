@@ -69,20 +69,21 @@ accounts = [ Account.create() for x in range(num_nodes) ]
 
 # Encrypt all the node's private keys and store them into clef.
 # This is why clef's password is required.
-for account in accounts:
-    encrypted = account.encrypt(clef['password'])
+if containers.clef: 
+    for account in accounts:
+        encrypted = account.encrypt(clef['password'])
 
-    now = datetime.utcnow()
-    pretty_address = account.address[2:].lower()
+        now = datetime.utcnow()
+        pretty_address = account.address[2:].lower()
 
-    file_name = "UTC--{}--{}".format(
-        now.strftime("%Y-%m-%dT%H-%M-%S.%f"),
-        pretty_address
-    )
+        file_name = "UTC--{}--{}".format(
+            now.strftime("%Y-%m-%dT%H-%M-%S.%f"),
+            pretty_address
+        )
 
-    # Let's save it in a file format hopefully usable by clef
-    with open(file_name, 'w') as f:
-         f.write(json.dumps(encrypted))
+        # Let's save it in a file format hopefully usable by clef
+        with open(file_name, 'w') as f:
+            f.write(json.dumps(encrypted))
 
 file_loader = FileSystemLoader('templates')
 env = Environment(
