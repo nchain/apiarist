@@ -2,10 +2,8 @@
 
 # Make sure submodules etc are updated.
 git submodule update --init --recursive
-docker container prune
 
 VENV=$(which virtualenv)
-
 # First make sure a python virtual environment is installed
 $VENV .virtualenv
 source ./.virtualenv/bin/activate
