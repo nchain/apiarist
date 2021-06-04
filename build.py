@@ -69,7 +69,7 @@ accounts = [ Account.create() for x in range(num_nodes) ]
 
 # Encrypt all the node's private keys and store them into clef.
 # This is why clef's password is required.
-if containers.clef: 
+if containers["clef"]: 
     for account in accounts:
         encrypted = account.encrypt(clef['password'])
 
