@@ -73,9 +73,9 @@ for key in keys:
     acct = Account.from_key( decrypted )
     accounts.append(acct)
 
+curr_size = len(keys)
 # Second let's create new Ethereum accounts for the
 # nodes.
-curr_size = len(keys)
 if (curr_size < num_nodes):
     extra_len = num_nodes - curr_size
     Account.enable_unaudited_hdwallet_features()
