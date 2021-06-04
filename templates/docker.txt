@@ -131,11 +131,16 @@ services:
 {% endif %}
 
 {% if containers.bees %}
-{% for account in accounts %}
-{% set api_addr = (loop.index0 * 3) + network.base_host_port %}
-{% set p2p_addr = api_addr + 1 %}
-{% set debug_api_addr = p2p_addr + 1 %}
-{% set nat_addr = loop.index0 + network.base_external_port %}
+  {% for account in accounts %}
+    {% set host_ip = host_pub_ips[ loop.index0 ] %}
+    {% set api_port = 1633 %}
+    {% set p2p_port = 1634 %}
+    {% set debug_api_port = 1635 %}
+    {% if containers.nat %}
+      {% set nat_port = network.base_external_port + loop.index0 %}
+      {% set api_port = 1633 + loop.index0 %}
+      {% set p2p_port = 1634 + loop.index0 %}
+    {% endif %}
   bee-{{ loop.index }}:
     image: ethersphere/bee:{{ versions.bee }}
     container_name: bee-{{ loop.index }}
@@ -144,7 +149,9 @@ services:
       - bee_hive
     environment:
       - BEE_CLEF_SIGNER_ETHEREUM_ADDRESS={{ account.address[2:]|lower }}
-      - BEE_NAT_ADDR=:{{ nat_addr }}
+    {% if containers.nat %}
+      - BEE_NAT_ADDR=:{{ nat_port }}
+    {% endif %}      
       - BEE_API_ADDR
       - BEE_BOOTNODE
       - BEE_BOOTNODE_MODE
@@ -185,14 +192,14 @@ services:
       - BEE_FULL_NODE
       - BEE_TRANSACTION
     ports:
-      - "${API_ADDR:-{{ api_addr }}}${BEE_API_ADDR:-:1633}"
-      - "${P2P_ADDR:-{{ p2p_addr }}}${BEE_P2P_ADDR:-:1634}"
-      - "${DEBUG_API_ADDR:-127.0.0.1:{{ debug_api_addr }}}${BEE_DEBUG_API_ADDR:-:1635}"
+      - "{{ host_ip }}:{{ api_port }}:1633"
+      - "{{ host_ip }}:{{ p2p_port }}:1634"
+      - "127.0.0.1:{{ debug_api_port }}:1635"
     volumes:
       - {{ paths.root }}/bee-{{ loop.index }}:/home/bee/.bee
       - {{ paths.root }}/password:/home/bee/.bee/password
     command: start
     depends_on:
       - clef
-{% endfor %}
+  {% endfor %}
 {% endif %}

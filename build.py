@@ -60,6 +60,8 @@ containers = {
     'bees': hiveYaml['containers']['bees'],
 }
 
+host_pub_ips = hiveYaml['host_pub_ips']
+
 # First let's go through and generate all the Ethereum accounts for the
 # nodes.
 Account.enable_unaudited_hdwallet_features()
@@ -94,7 +96,8 @@ def process(input, output):
 
     rendered = template.render(
         num_nodes=num_nodes, paths=paths, clef=clef, network=network,
-        versions=versions, accounts=accounts, containers=containers
+        versions=versions, accounts=accounts, containers=containers, 
+        host_pub_ips=host_pub_ips
     )
 
     with open(output, 'w') as f:
