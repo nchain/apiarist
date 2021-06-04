@@ -135,7 +135,7 @@ services:
     {% set host_ip = host_pub_ips[ loop.index0 ] %}
     {% set api_port = 1633 %}
     {% set p2p_port = 1634 %}
-    {% set debug_api_port = 1635 %}
+    {% set debug_api_port = 1635 + loop.index0 %}
     {% if containers.nat %}
       {% set nat_port = network.base_external_port + loop.index0 %}
       {% set api_port = 1633 + loop.index0 %}
