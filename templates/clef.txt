@@ -20,7 +20,7 @@ if [ ! -f "$DATA/masterseed.json" ]; then
 #
 # WARNING: docker must be run WITHOUT a tty for this to work.
 #
-sudo docker run -i --entrypoint="" -v $DATA:/app/data $IMAGE $CLEF --configdir "/app/data" --stdio-ui init >/dev/null 2>&1 << EOF
+    sudo docker run -i --entrypoint="" -v $DATA:/app/data $IMAGE $CLEF --configdir "/app/data" --stdio-ui init >/dev/null 2>&1 << EOF
 $SECRET
 $SECRET
 EOF
@@ -31,8 +31,8 @@ fi
 {% for account in accounts %}
 pretty_address="{{ account.address[2:].lower() }}"
 num=$(sudo ls -l "$DATA/keystore/" | grep "$pretty_address" | wc -l)
-if "$num" -eq 0; then
-sudo docker run -i --entrypoint="" -v $DATA:/app/data $IMAGE $CLEF --configdir "/app/data" --keystore /app/data/keystore --stdio-ui setpw {{ account.address|lower }} >/dev/null 2>&1 << EOF
+if [ "$num" -eq 0]; then
+    sudo docker run -i --entrypoint="" -v $DATA:/app/data $IMAGE $CLEF --configdir "/app/data" --keystore /app/data/keystore --stdio-ui setpw {{ account.address|lower }} >/dev/null 2>&1 << EOF
 $SECRET
 $SECRET
 $SECRET
