@@ -16,14 +16,14 @@ CLEF="/usr/local/bin/clef"
 IMAGE="ethersphere/clef:{{ versions.clef }}"
 
 if [ ! -f "$DATA/masterseed.json" ]; then
-    # First initialise the masterseed.json used to store the credentials
-    #
-    # WARNING: docker must be run WITHOUT a tty for this to work.
-    #
-    sudo docker run -i --entrypoint="" -v $DATA:/app/data $IMAGE $CLEF --configdir "/app/data" --stdio-ui init >/dev/null 2>&1 << EOF
-    $SECRET
-    $SECRET
-    EOF
+# First initialise the masterseed.json used to store the credentials
+#
+# WARNING: docker must be run WITHOUT a tty for this to work.
+#
+sudo docker run -i --entrypoint="" -v $DATA:/app/data $IMAGE $CLEF --configdir "/app/data" --stdio-ui init >/dev/null 2>&1 << EOF
+$SECRET
+$SECRET
+EOF
 fi
 
 # There's no need to add new accounts, as these should have already been 
