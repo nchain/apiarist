@@ -39,4 +39,4 @@ chmod +x monBee.sh
 
 docker-compose up -d
 
-cat tearsheet.txt
+#cat tearsheet.txt
