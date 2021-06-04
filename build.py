@@ -10,6 +10,7 @@ import time
 import json
 import sys
 import yaml
+import glob
 
 HIVE_YAML = sys.argv[1]
 with open(HIVE_YAML, 'r') as f:
@@ -62,17 +63,27 @@ containers = {
 
 host_pub_ips = hiveYaml['host_pub_ips']
 
-# First let's go through and generate all the Ethereum accounts for the
+# First let's go through existing Ethereum accounts for the
 # nodes.
-Account.enable_unaudited_hdwallet_features()
-accounts = [ Account.create() for x in range(num_nodes) ]
+accounts = []
+keys = glob.glob( paths["root"] + "/clef/keystore/UTC*" )
+for key in keys:
+    encrypted = open(key).read()
+    decrypted = Account.decrypt(encrypted, clef["password"])
+    acct = Account.from_key( decrypted )
+    accounts.append(acct)
 
-# Encrypt all the node's private keys and store them into clef.
-# This is why clef's password is required.
-if containers["clef"]: 
-    for account in accounts:
+# Second let's create new Ethereum accounts for the
+# nodes.
+curr_size = len(keys)
+if (curr_size < num_nodes):
+    extra_len = num_nodes - curr_size
+    Account.enable_unaudited_hdwallet_features()
+    extra_accounts = [ Account.create() for x in range(extra_len) ]
+    for account in extra_accounts:
+        # Encrypt all the node's private keys and store them into clef.
+        # This is why clef's password is required.
         encrypted = account.encrypt(clef['password'])
-
         now = datetime.utcnow()
         pretty_address = account.address[2:].lower()
 
@@ -80,10 +91,12 @@ if containers["clef"]:
             now.strftime("%Y-%m-%dT%H-%M-%S.%f"),
             pretty_address
         )
+        accounts.append(account)
 
         # Let's save it in a file format hopefully usable by clef
         with open(file_name, 'w') as f:
             f.write(json.dumps(encrypted))
+  
 
 file_loader = FileSystemLoader('templates')
 env = Environment(
