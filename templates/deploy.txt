@@ -33,7 +33,7 @@ sudo mv password {{ paths.root }}/password
 # Setup permissions for metrics gathering
 sudo chown 65534:65534 {{ paths.root }}/prometheus
 [ -d "{{ paths.root }}/prometheus" ] && sudo chmod 755 {{ paths.root }}/prometheus
-[ -f "{{ paths.root }}/password" ] sudo chmod 777 {{ paths.root }}/password
+[ -f "{{ paths.root }}/password" ] && sudo chmod 777 {{ paths.root }}/password
 
 chmod +x monBee.sh
 
