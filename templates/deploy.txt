@@ -40,4 +40,4 @@ chmod +x monBee.sh
 docker-compose up -d
 docker container prune -f
 
-#cat tearsheet.txt
+cat tearsheet.txt
