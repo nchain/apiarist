@@ -66,10 +66,11 @@ host_pub_ips = hiveYaml['host_pub_ips']
 # First let's go through existing Ethereum accounts for the
 # nodes.
 accounts = []
-keyfile_p = paths["root"] + "/clef/keystore/UTC*"
-print( 'key file pattern: ' + keyfile_p )
+clef_key_dir = './clef_keys'
+clef_key_p =  clef_key_dir + "/UTC*"
+print( 'key file pattern: ' + clef_key_p )
 
-for keyfile in glob.glob( keyfile_p ):
+for keyfile in glob.glob( clef_key_p ):
     encrypted = open(keyfile).read()
     decrypted = Account.decrypt(encrypted, clef["password"])
     acct = Account.from_key( decrypted )
@@ -100,7 +101,7 @@ if (curr_size < num_nodes):
         accounts.append(account)
 
         # Let's save it in a file format hopefully usable by clef
-        with open(file_name, 'w') as f:
+        with open(clef_key_dir + '/' + file_name, 'w') as f:
             f.write(json.dumps(encrypted))
   
 
