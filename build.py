@@ -69,17 +69,18 @@ accounts = []
 clef_key_dir = './clef_keys'
 clef_key_p =  clef_key_dir + "/UTC*"
 print( 'key file pattern: ' + clef_key_p )
-
+step = 0
 for keyfile in glob.glob( clef_key_p ):
+    step += 1
     encrypted = open(keyfile).read()
     decrypted = Account.decrypt(encrypted, clef["password"])
     acct = Account.from_key( decrypted )
     pretty_address = acct.address[2:].lower()
-    print("added acct: " + pretty_address)
+    print( '%d : added acct: [%s]' %(step, pretty_address) )
     accounts.append(acct)
 
 curr_size = len(accounts)
-print ('loaded %d existing accounts from clef keystore' % (curr_size))
+print ('loaded %d existing accounts' % (curr_size))
 
 # Second let's create new Ethereum accounts for the
 # nodes.
