@@ -266,18 +266,3 @@ $ sudo ./down.sh
 ```
 
 **NOTE**: This does NOT delete the hive directory hosting all the data.
-
-
-# Donations
-
-As with everything, donations are welcome to help support me to become more
-active in this scene.
-
-* ETH: 0x44DCcA483E0d7aD6A5a1b4CE2B6DfDCBc568F545
-* BTC: bc1qm93lvp69cucvgfvxv3u78nphnrz7g8tla8apgh
-
-Or if it helped you and you use Brave please tip!
-
-Catch me on Swarm's discord
-
-mfw78.
