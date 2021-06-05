@@ -105,7 +105,7 @@ if (curr_size < num_nodes):
         with open(clef_key_dir + '/' + file_name, 'w') as f:
             f.write(json.dumps(encrypted))
         
-        print('created new acct: [%d]' % (pretty_address))
+        print('created new acct: [%s]' % (pretty_address))
   
 print('Total accounts loaded: %d ' % (len(accounts)) )
 
