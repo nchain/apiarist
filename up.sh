@@ -16,6 +16,7 @@ HIVE_YAML=$1
 [ -z "$HIVE_YAML" ] && HIVE_YAML="$HOME/.hive.yml"
 [ ! -f "$HIVE_YAML" ] && echo "$HOME/.hive.yml not found" && exit 1
 
+mkdir -p ./clef_keys
 python build.py $HIVE_YAML
 
 # Deploy to docker-compose
