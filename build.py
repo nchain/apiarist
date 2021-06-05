@@ -66,8 +66,11 @@ host_pub_ips = hiveYaml['host_pub_ips']
 # First let's go through existing Ethereum accounts for the
 # nodes.
 accounts = []
-for key in glob.glob( paths["root"] + "/clef/keystore/UTC*" ):
-    encrypted = open(key).read()
+keyfile_p = paths["root"] + "/clef/keystore/UTC*"
+print( 'key file pattern: ' + keyfile_p )
+
+for keyfile in glob.glob( keyfile_p ):
+    encrypted = open(keyfile).read()
     decrypted = Account.decrypt(encrypted, clef["password"])
     acct = Account.from_key( decrypted )
     pretty_address = acct.address[2:].lower()
