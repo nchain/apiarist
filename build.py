@@ -74,8 +74,8 @@ for key in glob.glob( paths["root"] + "/clef/keystore/UTC*" ):
     print("added acct: " + pretty_address)
     accounts.append(acct)
 
-curr_size = len(keys)
-print (f"loaded {curr_size} existing accounts from clef keystore")
+curr_size = len(accounts)
+print (f'loaded {curr_size} existing accounts from clef keystore')
 
 # Second let's create new Ethereum accounts for the
 # nodes.
