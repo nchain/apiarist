@@ -72,11 +72,11 @@ for key in keys:
     decrypted = Account.decrypt(encrypted, clef["password"])
     acct = Account.from_key( decrypted )
     pretty_address = acct.address[2:].lower()
-    print("add acct: " + pretty_address)
+    print("added acct: " + pretty_address)
     accounts.append(acct)
 
 curr_size = len(keys)
-print ("loaded {curr_size} existing accounts from clef keystore")
+print (f"loaded {curr_size} existing accounts from clef keystore")
 
 # Second let's create new Ethereum accounts for the
 # nodes.
