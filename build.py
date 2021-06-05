@@ -78,7 +78,7 @@ for keyfile in glob.glob( keyfile_p ):
     accounts.append(acct)
 
 curr_size = len(accounts)
-print (f'loaded {curr_size} existing accounts from clef keystore')
+print (f"loaded {curr_size} existing accounts from clef keystore")
 
 # Second let's create new Ethereum accounts for the
 # nodes.
