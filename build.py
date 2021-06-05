@@ -68,7 +68,7 @@ host_pub_ips = hiveYaml['host_pub_ips']
 accounts = []
 clef_key_dir = './clef_keys'
 clef_key_p =  clef_key_dir + "/UTC*"
-print( 'key file pattern: ' + clef_key_p )
+
 step = 0
 for keyfile in glob.glob( clef_key_p ):
     step += 1
@@ -76,7 +76,7 @@ for keyfile in glob.glob( clef_key_p ):
     decrypted = Account.decrypt(encrypted, clef["password"])
     acct = Account.from_key( decrypted )
     pretty_address = acct.address[2:].lower()
-    print( '%d : added acct: [%s]' %(step, pretty_address) )
+    print( '%d : loaded acct: [%s]' %(step, pretty_address) )
     accounts.append(acct)
 
 curr_size = len(accounts)
@@ -104,7 +104,10 @@ if (curr_size < num_nodes):
         # Let's save it in a file format hopefully usable by clef
         with open(clef_key_dir + '/' + file_name, 'w') as f:
             f.write(json.dumps(encrypted))
+        
+        print('created new acct: [%d]' % (pretty_address))
   
+print('Total accounts loaded: %d ' % (len(accounts)) )
 
 file_loader = FileSystemLoader('templates')
 env = Environment(
