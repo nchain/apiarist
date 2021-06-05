@@ -88,9 +88,11 @@ if (curr_size < num_nodes):
     extra_len = num_nodes - curr_size
     Account.enable_unaudited_hdwallet_features()
     extra_accounts = [ Account.create() for x in range(extra_len) ]
+    steps = 0
     for account in extra_accounts:
         # Encrypt all the node's private keys and store them into clef.
         # This is why clef's password is required.
+        steps += 1
         encrypted = account.encrypt(clef['password'])
         now = datetime.utcnow()
         pretty_address = account.address[2:].lower()
@@ -105,7 +107,7 @@ if (curr_size < num_nodes):
         with open(clef_key_dir + '/' + file_name, 'w') as f:
             f.write(json.dumps(encrypted))
         
-        print('created new acct: [%s]' % (pretty_address))
+        print('[%d] created new acct: [%s]' % (steps, pretty_address))
   
 print('Total accounts loaded: %d ' % (len(accounts)) )
 
