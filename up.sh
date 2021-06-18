@@ -13,8 +13,8 @@ pip3 install -r requirements.txt
 
 # Now, generate all the files, including deploy.sh
 HIVE_YAML=$1
-[ -z "$HIVE_YAML" ] && HIVE_YAML="$HOME/.hive.yml"
-[ ! -f "$HIVE_YAML" ] && echo "$HOME/.hive.yml not found" && exit 1
+[ -z "$HIVE_YAML" ] && HIVE_YAML="$HOME/.config/swarm/hive.yml"
+[ ! -f "$HIVE_YAML" ] && echo "$HIVE_YAML not found" && exit 1
 
 mkdir -p ./clef_keys
 python build.py $HIVE_YAML
