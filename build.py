@@ -1,7 +1,3 @@
-#
-# Author mfw78@chasingseed.com
-#
-
 import os
 from jinja2 import Environment, FileSystemLoader
 from eth_account import Account
