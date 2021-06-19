@@ -22,7 +22,7 @@ num_nodes = hiveYaml['num_nodes']
 # Every bee has it's day
 versions = {
     'clef': hiveYaml['versions']['clef'],
-    'bee': hiveYaml['versions']['bee'],
+    'bee':  hiveYaml['versions']['bee'],
     'geth': hiveYaml['versions']['geth']
 }
 

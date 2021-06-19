@@ -1,6 +1,6 @@
 [submodule "grafana/provisioning/dashboards/grafana-dashboards"]
 	path = grafana/provisioning/dashboards/grafana-dashboards
-	url = https://github.com/ethersphere/grafana-dashboards
+	url = git@github.com:ethersphere/grafana-dashboards.git
 [submodule "monBee"]
 	path = monBee
-	url = https://github.com/ldeffenb/monBee
+	url = git@github.com:ldeffenb/monBee.git

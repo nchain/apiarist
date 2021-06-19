@@ -6,7 +6,7 @@ working to perfect the ancient art of bee keeping - to become *the* apiarist.
 
 ## Motivations
 
-If you want your hives to *hummmm*, they need to be well planned. *Apiarist* is designed with the following intentions:
+If you want your hives to *hummmm*, they need to be well planned. *beehive* is designed with the following intentions:
 
 1. Number of 🐝 nodes: >1
 2. Swap endpoint: Running our *own* geth goerli endpoint, independent of 
