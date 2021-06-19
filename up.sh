@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Make sure submodules etc are updated.
-git submodule update --init --recursive
+# git submodule update --init --recursive
 
 VENV=$(which virtualenv)
 # First make sure a python virtual environment is installed
