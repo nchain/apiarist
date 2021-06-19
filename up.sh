@@ -5,6 +5,7 @@
 
 VENV=$(which virtualenv)
 # First make sure a python virtual environment is installed
+mkdir -p .virtualenv
 $VENV .virtualenv
 source ./.virtualenv/bin/activate
 
