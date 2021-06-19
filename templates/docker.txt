@@ -122,7 +122,7 @@ services:
     networks:
       - bee_hive
     ports:
-      - 127.0.0.1:8550:8550
+      - 0.0.0.0:8550:8550
     environment:
       - CLEF_CHAINID
     volumes:
