@@ -78,6 +78,8 @@ for keyfile in glob.glob( clef_key_p ):
 curr_size = len(accounts)
 print ('loaded %d existing accounts' % (curr_size))
 
+accounts_f = open("./clef_keys/accounts", 'w')
+
 # Second let's create new Ethereum accounts for the
 # nodes.
 if (curr_size < num_nodes):
@@ -92,6 +94,7 @@ if (curr_size < num_nodes):
         encrypted = account.encrypt(clef['password'])
         now = datetime.utcnow()
         pretty_address = account.address[2:].lower()
+        accounts_f.writelines(pretty_address + "\n")
 
         file_name = "UTC--{}--{}".format(
             now.strftime("%Y-%m-%dT%H-%M-%S.%f"),
@@ -105,6 +108,8 @@ if (curr_size < num_nodes):
         
         print('[%d] created new acct: [%s]' % (steps, pretty_address))
   
+accounts_f.close()
+
 print('Total accounts loaded: %d ' % (len(accounts)) )
 
 file_loader = FileSystemLoader('templates')
