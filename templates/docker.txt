@@ -136,7 +136,7 @@ services:
     {% set api_port = 1633 %}
     {% set p2p_port = 1634 %}
     {% set debug_api_port = 1635 + loop.index0 %}
-    {% if containers.nat %}
+    {% if nat %}
       {% set nat_port = network.base_external_port + loop.index0 %}
       {% set api_port = 1633 + loop.index0 %}
       {% set p2p_port = 1634 + loop.index0 %}
@@ -149,7 +149,7 @@ services:
       - bee_hive
     environment:
       - BEE_CLEF_SIGNER_ETHEREUM_ADDRESS={{ account.address[2:]|lower }}
-    {% if containers.nat %}
+    {% if nat %}
       - BEE_NAT_ADDR=:{{ nat_port }}
     {% endif %}      
       - BEE_API_ADDR

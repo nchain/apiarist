@@ -17,6 +17,7 @@ external_ip_addr: 8.8.8.8
 grafana_port: 3000
 geth_http_port: 8545
 geth_ws_port: 8546
+nat: false
 containers:
   prometheus: true
   cadvisor: true
@@ -27,7 +28,6 @@ containers:
   geth-goerli-exporter: true
   clef: true
   bees: true
-  nat: false
 host_pub_ips:
   - ipv4_1
   - ipv4_2
