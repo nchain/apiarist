@@ -38,6 +38,7 @@ paths = {
 # WARNING: THIS MUST BE AT LEAST 10 CHARACTERS LONG.
 #          REFER TO https://geth.ethereum.org/docs/getting-started
 clef = {
+    'chain_id':             hiveYaml['clef']['chain_id'],
     'password':             hiveYaml['clef']['password'],
     'location':             hiveYaml['clef']['location']
 }
