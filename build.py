@@ -55,7 +55,6 @@ network = {
     'grafana_port':         hiveYaml['grafana_port'],
     'geth_http_port':       hiveYaml['geth_http_port'],
     'geth_ws_port':         hiveYaml['geth_ws_port'],
-    'use_single_pubip':
 }
 
 containers = {
