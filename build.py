@@ -151,14 +151,14 @@ def process(input, output):
         f.write(rendered)
 
 templates = [
-    ('docker.txt', 'docker-compose.yaml'),
+    ('docker-compose.txt.yaml', 'docker-compose.yaml'),
     ('env.ini', '.env'),
     ('password.txt', 'password'),
-    ('clef.txt', 'clef.sh'),
-    ('deploy.txt', 'deploy.sh'),
-    ('prometheus.txt', 'prometheus/prometheus.yml'),
+    ('clef.txt.sh', 'clef.sh'),
+    ('deploy.txt.sh', 'deploy.sh'),
+    ('prometheus.txt.yml', 'prometheus/prometheus.yml'),
     ('tearsheet.txt', 'tearsheet.txt'),
-    ('monBee.txt', 'monBee.sh')
+    ('monBee.txt.sh', 'monBee.sh')
 ]
 
 # Process the templates
