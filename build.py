@@ -40,7 +40,8 @@ paths = {
 clef = {
     'chain_id':             hiveYaml['clef']['chain_id'],
     'password':             hiveYaml['clef']['password'],
-    'location':             hiveYaml['clef']['location']
+    'location':             hiveYaml['clef']['location'],
+    'keys_dir':             HIVE_KEYS_DIR   
 }
 
 goerli = {

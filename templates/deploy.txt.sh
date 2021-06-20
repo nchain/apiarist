@@ -25,7 +25,7 @@ sudo chmod 775 {{ paths.root }}/password
 # Let's setup clef to make sure it does its job of co-ordinating for our bees
 {% if containers.clef %}
 sudo mkdir -p {{ paths.root }}/clef/keystore
-sudo cp -r ./clef_keys/UTC* {{ paths.root }}/clef/keystore/
+sudo cp -r {{ clef.keys_dir }}/UTC* {{ paths.root }}/clef/keystore/
 sudo cp password {{ paths.root }}/clef/password
 sudo chown 65534:0 -R {{ paths.root }}/clef
 sudo chmod 750 {{ paths.root }}/clef
