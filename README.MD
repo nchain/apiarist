@@ -34,7 +34,7 @@ names:
 
 ```python
 
-num_nodes: 61               # number of bee nodes you wanna run within a sigle host machine
+bee_num: 61               # number of bee nodes you wanna run within a sigle host machine
 versions:                   # Every bee has it's day
   clef: '0.4.12'
   bee: '0.6.2'

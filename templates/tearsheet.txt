@@ -2,7 +2,7 @@ Welcome to beeee keeping!
 
 Your hive has been successfully deployed. The details are as follows:
 
-Number of bees:         {{ num_nodes }}
+Number of bees:         {{ bee_num }}
 Grafana metrics:        http://{{ network.host_ip_addr }}:{{ network.grafana_port }}
 Grafana credentials:    admin/foobar
 Goerli Endpoint (HTTP): http://{{ network.host_ip_addr }}:{{ network.geth_http_port }}

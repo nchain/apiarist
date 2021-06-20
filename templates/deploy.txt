@@ -12,7 +12,7 @@ sudo mkdir -p {{ paths.root }}
 {% endif %}
 
 # Create all the data directories for the bees to store their tasty honey
-{% for i in range(num_nodes) %}
+{% for i in range(bee_num) %}
     sudo mkdir -p {{ paths.root }}/bee-{{ loop.index }}
     sudo chown 65534:65534  {{ paths.root }}/bee-{{ loop.index }}
     sudo chmod 777 {{ paths.root }}/bee-{{ loop.index }}

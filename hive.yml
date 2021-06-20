@@ -3,7 +3,7 @@
 ### pls update and save this file as 
 ###         ~/.hive.yml
 ################################################
-num_nodes: 61
+bee_num: 61
 versions:
   clef: '0.4.12'
   bee: '0.6.2'

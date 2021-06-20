@@ -17,7 +17,7 @@ with open(HIVE_YAML, 'r') as f:
     hiveYaml = yaml.load(f, Loader=yaml.FullLoader)
 
 # Number of bees at the queen's service should she choose.
-num_nodes =                 hiveYaml['num_nodes']
+bee_num =                 hiveYaml['bee_num']
 
 # Every bee has it's day
 versions = {
@@ -94,8 +94,8 @@ if containers['clef']:
 
     # Second let's create new Ethereum accounts for the
     # nodes.
-    if (curr_size < num_nodes):
-        extra_len = num_nodes - curr_size
+    if (curr_size < bee_num):
+        extra_len = bee_num - curr_size
         Account.enable_unaudited_hdwallet_features()
         extra_accounts = [ Account.create() for x in range(extra_len) ]
         steps = 0
@@ -142,7 +142,7 @@ def process(input, output):
     template = env.get_template(input)
 
     rendered = template.render(
-        num_nodes=num_nodes, paths=paths, clef=clef, goerli=goerli, network=network,
+        bee_num=bee_num, paths=paths, clef=clef, goerli=goerli, network=network,
         versions=versions, accounts=accounts, containers=containers,
         bee_host_ips=bee_host_ips
     )
