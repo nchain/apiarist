@@ -18,6 +18,8 @@ sudo mkdir -p {{ paths.root }}
     sudo chmod 755 {{ paths.root }}/bee-{{ loop.index }}
 {% endfor %}
 
+sudo cp password {{ paths.root }}/password
+
 # Let's setup clef to make sure it does its job of co-ordinating for our bees
 {% if containers.clef %}
     sudo mkdir -p {{ paths.root }}/clef/keystore
@@ -26,9 +28,8 @@ sudo mkdir -p {{ paths.root }}
     sudo chown 65534:0 -R {{ paths.root }}/clef
     sudo chmod 750 {{ paths.root }}/clef
     sudo sh -c "chmod -R 0600 {{ paths.root }}/clef/keystore/UTC*"
-    sudo mv password {{ paths.root }}/password
+    sudo sh clef.sh
 {% endif %}
-sudo sh clef.sh
 
 # Setup permissions for metrics gathering
 [ -d "{{ paths.root }}/prometheus" ] && sudo chown 65534:65534 {{ paths.root }}/prometheus
