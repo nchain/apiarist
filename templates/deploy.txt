@@ -18,7 +18,9 @@ sudo mkdir -p {{ paths.root }}
     sudo chmod 755 {{ paths.root }}/bee-{{ loop.index }}
 {% endfor %}
 
-sudo cp password {{ paths.root }}/password
+sudo cp ./password {{ paths.root }}/password
+sudo chown rad. -R {{ paths.root }}/password
+sudo chmod 750 {{ paths.root }}/password
 
 # Let's setup clef to make sure it does its job of co-ordinating for our bees
 {% if containers.clef %}
