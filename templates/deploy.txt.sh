@@ -13,9 +13,9 @@ sudo mkdir -p {{ paths.root }}
 
 # Create all the data directories for the bees to store their tasty honey
 {% for i in range(bee_num) %}
-    sudo mkdir -p {{ paths.root }}/bee-{{ loop.index }}
-    sudo chown 65534:65534  {{ paths.root }}/bee-{{ loop.index }}
-    sudo chmod 775 {{ paths.root }}/bee-{{ loop.index }}
+sudo mkdir -p {{ paths.root }}/bee-{{ loop.index }}
+sudo chown 65534:65534  {{ paths.root }}/bee-{{ loop.index }}
+sudo chmod 775 {{ paths.root }}/bee-{{ loop.index }}
 {% endfor %}
 
 sudo cp ./password {{ paths.root }}/password
@@ -24,13 +24,13 @@ sudo chmod 775 {{ paths.root }}/password
 
 # Let's setup clef to make sure it does its job of co-ordinating for our bees
 {% if containers.clef %}
-    sudo mkdir -p {{ paths.root }}/clef/keystore
-    sudo cp -r ./clef_keys/UTC* {{ paths.root }}/clef/keystore/
-    sudo cp password {{ paths.root }}/clef/password
-    sudo chown 65534:0 -R {{ paths.root }}/clef
-    sudo chmod 750 {{ paths.root }}/clef
-    sudo sh -c "chmod -R 0600 {{ paths.root }}/clef/keystore/UTC*"
-    sudo sh clef.sh
+sudo mkdir -p {{ paths.root }}/clef/keystore
+sudo cp -r ./clef_keys/UTC* {{ paths.root }}/clef/keystore/
+sudo cp password {{ paths.root }}/clef/password
+sudo chown 65534:0 -R {{ paths.root }}/clef
+sudo chmod 750 {{ paths.root }}/clef
+sudo sh -c "chmod -R 0600 {{ paths.root }}/clef/keystore/UTC*"
+sudo sh clef.sh
 {% endif %}
 
 # Setup permissions for metrics gathering
