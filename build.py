@@ -17,56 +17,56 @@ with open(HIVE_YAML, 'r') as f:
     hiveYaml = yaml.load(f, Loader=yaml.FullLoader)
 
 # Number of bees at the queen's service should she choose.
-num_nodes = hiveYaml['num_nodes']
+num_nodes =                 hiveYaml['num_nodes']
 
 # Every bee has it's day
 versions = {
-    'clef': hiveYaml['versions']['clef'],
-    'bee':  hiveYaml['versions']['bee'],
-    'geth': hiveYaml['versions']['geth']
+    'clef':                 hiveYaml['versions']['clef'],
+    'bee':                  hiveYaml['versions']['bee'],
+    'geth':                 hiveYaml['versions']['geth']
 }
 
 # Where do we keep the sweet honey
 paths = {
-    'root': hiveYaml['root_path'],
+    'root':                 hiveYaml['root_path'],
 }
 
 # The clef password - used to encrypt new ethereum accounts.
 # WARNING: THIS MUST BE AT LEAST 10 CHARACTERS LONG.
 #          REFER TO https://geth.ethereum.org/docs/getting-started
 clef = {
-    'password': hiveYaml['clef_password'],
-    'location': hiveYaml['clef_location']
+    'password':             hiveYaml['clef']['password'],
+    'location':             hiveYaml['clef']['location']
 }
 
 goerli = {
-    'location' : hiveYaml['goerli_location']
+    'location' :            hiveYaml['goerli']['location']
 }
 
 # Network port settings - let's make it easier to share pollen!
 network = {
-    'base_host_port': hiveYaml['base_host_port'],
-    'base_external_port': hiveYaml['base_external_port'],
-    'host_ip_addr': hiveYaml['host_ip_addr'],
-    'external_ip_addr': hiveYaml['external_ip_addr'],
-    'grafana_port': hiveYaml['grafana_port'],
-    'geth_http_port': hiveYaml['geth_http_port'],
-    'geth_ws_port': hiveYaml['geth_ws_port'],
+    'base_host_port':       hiveYaml['base_host_port'],
+    'base_external_port':   hiveYaml['base_external_port'],
+    'host_ip_addr':         hiveYaml['host_ip_addr'],
+    'external_ip_addr':     hiveYaml['external_ip_addr'],
+    'grafana_port':         hiveYaml['grafana_port'],
+    'geth_http_port':       hiveYaml['geth_http_port'],
+    'geth_ws_port':         hiveYaml['geth_ws_port'],
 }
 
 containers = {
-    'prometheus': hiveYaml['containers']['prometheus'],
-    'cadvisor': hiveYaml['containers']['cadvisor'],
-    'node_exporter': hiveYaml['containers']['node-exporter'],
-    'alertmanager': hiveYaml['containers']['alertmanager'],
-    'grafana': hiveYaml['containers']['grafana'],
-    'geth_goerli': hiveYaml['containers']['geth-goerli'],
+    'prometheus':           hiveYaml['containers']['prometheus'],
+    'cadvisor':             hiveYaml['containers']['cadvisor'],
+    'node_exporter':        hiveYaml['containers']['node-exporter'],
+    'alertmanager':         hiveYaml['containers']['alertmanager'],
+    'grafana':              hiveYaml['containers']['grafana'],
+    'geth_goerli':          hiveYaml['containers']['geth-goerli'],
     'geth_goerli_exporter': hiveYaml['containers']['geth-goerli-exporter'],
-    'clef': hiveYaml['containers']['clef'],
-    'bees': hiveYaml['containers']['bees'],
+    'clef':                 hiveYaml['containers']['clef'],
+    'bees':                 hiveYaml['containers']['bees'],
 }
 
-host_pub_ips = hiveYaml['host_pub_ips']
+host_pub_ips =              hiveYaml['host_pub_ips']
 
 if containers.clef:
     # First let's go through existing Ethereum accounts for the
