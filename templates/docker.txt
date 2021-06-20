@@ -132,7 +132,7 @@ services:
 
 {% if containers.bees %}
   {% for address in accounts %}
-    {% if bee_host_ips.size() <= 1 %}
+    {% if bee_host_ips |length <= 1 %}
       {% set host_ip = external_ip_addr %}
       {% set api_port = 1633 + loop.index0  %}
       {% set p2p_port = 1634 + loop.index0  %}
