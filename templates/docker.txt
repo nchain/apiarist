@@ -205,7 +205,9 @@ services:
       - {{ paths.root }}/bee-{{ loop.index }}:/home/bee/.bee
       - {{ paths.root }}/password:/home/bee/.bee/password
     command: start
+  {% if containers.clef %}
     depends_on:
       - clef
+  {% endif %}
   {% endfor %}
 {% endif %}
