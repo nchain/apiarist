@@ -119,7 +119,7 @@ if containers['clef']:
     
     accounts_f.close()
 
-if containers.bees:
+if containers['bees']:
     accounts = []
     with open(HIVE_ACCOUNTS, 'r') as f:
         lines = f.readlines()
