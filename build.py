@@ -9,6 +9,9 @@ import yaml
 import glob
 
 HIVE_YAML = sys.argv[1]
+HIVE_CONFIG_DIR = os.path.dirname(os.path.abspath(HIVE_YAML))
+HIVE_ACCOUNTS = HIVE_CONFIG_DIR + "/accounts"
+
 with open(HIVE_YAML, 'r') as f:
     hiveYaml = yaml.load(f, Loader=yaml.FullLoader)
 
@@ -84,7 +87,7 @@ if containers.clef:
     curr_size = len(accounts)
     print ('loaded %d existing accounts' % (curr_size))
 
-    accounts_f = open("./clef_keys/accounts", 'w')
+    accounts_f = open(HIVE_ACCOUNTS, 'w')
 
     # Second let's create new Ethereum accounts for the
     # nodes.
@@ -118,7 +121,7 @@ if containers.clef:
 
 if containers.bees:
     accounts = []
-    with open("./clef_keys/accounts", 'r') as f:
+    with open(HIVE_ACCOUNTS, 'r') as f:
         lines = f.readlines()
         for line in lines:
             accounts.append(line)
