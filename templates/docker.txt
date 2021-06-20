@@ -132,9 +132,15 @@ services:
 
 {% if containers.bees %}
   {% for address in accounts %}
-    {% set host_ip = host_pub_ips[ loop.index0 ] %}
-    {% set api_port = 1633 %}
-    {% set p2p_port = 1634 %}
+    {% if bee_host_ips.size() <= 1 %}
+      {% set host_ip = external_ip_addr %}
+      {% set api_port = 1633 + loop.index0  %}
+      {% set p2p_port = 1634 + loop.index0  %}
+    {% else %}
+      {% set host_ip = bee_host_ips[ loop.index0 ] %}
+      {% set api_port = 1633 %}
+      {% set p2p_port = 1634 %}
+    {% endif %}
     {% set debug_api_port = 1635 + loop.index0 %}
     {% if nat %}
       {% set nat_port = network.base_external_port + loop.index0 %}
