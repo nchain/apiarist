@@ -152,7 +152,7 @@ def process(input, output):
 
 templates = [
     ('docker.txt', 'docker-compose.yaml'),
-    ('env.txt', '.env'),
+    ('env.ini', '.env'),
     ('password.txt', 'password'),
     ('clef.txt', 'clef.sh'),
     ('deploy.txt', 'deploy.sh'),
