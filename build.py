@@ -55,6 +55,7 @@ network = {
     'grafana_port':         hiveYaml['grafana_port'],
     'geth_http_port':       hiveYaml['geth_http_port'],
     'geth_ws_port':         hiveYaml['geth_ws_port'],
+    'use_single_pubip':
 }
 
 containers = {
@@ -69,7 +70,7 @@ containers = {
     'bees':                 hiveYaml['containers']['bees'],
 }
 
-host_pub_ips =              hiveYaml['host_pub_ips']
+bee_host_ips =              hiveYaml['bee_host_ips']
 
 if containers['clef']:
     # First let's go through existing Ethereum accounts for the
@@ -144,7 +145,7 @@ def process(input, output):
     rendered = template.render(
         num_nodes=num_nodes, paths=paths, clef=clef, goerli=goerli, network=network,
         versions=versions, accounts=accounts, containers=containers,
-        host_pub_ips=host_pub_ips
+        bee_host_ips=bee_host_ips
     )
 
     with open(output, 'w') as f:
