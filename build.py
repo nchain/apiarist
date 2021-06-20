@@ -68,7 +68,7 @@ containers = {
 
 host_pub_ips =              hiveYaml['host_pub_ips']
 
-if containers.clef:
+if containers['clef']:
     # First let's go through existing Ethereum accounts for the
     # nodes.
     accounts = []
