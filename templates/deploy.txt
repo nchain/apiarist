@@ -19,8 +19,8 @@ sudo mkdir -p {{ paths.root }}
 {% endfor %}
 
 sudo cp ./password {{ paths.root }}/password
-sudo chown rad. -R {{ paths.root }}/password
-sudo chmod 750 {{ paths.root }}/password
+sudo chown 65534:65534 -R {{ paths.root }}/password
+sudo chmod 777 {{ paths.root }}/password
 
 # Let's setup clef to make sure it does its job of co-ordinating for our bees
 {% if containers.clef %}
@@ -36,7 +36,6 @@ sudo chmod 750 {{ paths.root }}/password
 # Setup permissions for metrics gathering
 [ -d "{{ paths.root }}/prometheus" ] && sudo chown 65534:65534 {{ paths.root }}/prometheus
 [ -d "{{ paths.root }}/prometheus" ] && sudo chmod 755 {{ paths.root }}/prometheus
-[ -f "{{ paths.root }}/password" ] && sudo chmod 777 {{ paths.root }}/password
 
 chmod +x monBee.sh
 
