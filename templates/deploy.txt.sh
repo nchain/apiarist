@@ -15,7 +15,7 @@ sudo mkdir -p {{ paths.root }}
 {% for i in range(bee_num) %}
 sudo mkdir -p {{ paths.root }}/bee-{{ loop.index }}
 sudo chown 65534:65534  {{ paths.root }}/bee-{{ loop.index }}
-sudo chmod 775 {{ paths.root }}/bee-{{ loop.index }}
+sudo chmod 777 {{ paths.root }}/bee-{{ loop.index }}
 {% endfor %}
 
 sudo cp ./password {{ paths.root }}/password
