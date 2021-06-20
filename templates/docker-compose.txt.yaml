@@ -175,7 +175,7 @@ services:
       - BEE_DEBUG_API_ENABLE
       - BEE_GATEWAY_MODE
       - BEE_GLOBAL_PINNING_ENABLE
-      - BEE_NETWORK_ID
+      - BEE_NETWORK_ID={{ clef.chain_id }}
       - BEE_P2P_ADDR
       - BEE_P2P_QUIC_ENABLE
       - BEE_P2P_WS_ENABLE
