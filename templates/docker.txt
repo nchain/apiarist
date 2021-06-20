@@ -131,7 +131,7 @@ services:
 {% endif %}
 
 {% if containers.bees %}
-  {% for account in accounts %}
+  {% for address in accounts %}
     {% set host_ip = host_pub_ips[ loop.index0 ] %}
     {% set api_port = 1633 %}
     {% set p2p_port = 1634 %}
@@ -148,7 +148,7 @@ services:
     networks:
       - bee_hive
     environment:
-      - BEE_CLEF_SIGNER_ETHEREUM_ADDRESS={{ account.address[2:]|lower }}
+      - BEE_CLEF_SIGNER_ETHEREUM_ADDRESS={{ address }}
     {% if nat %}
       - BEE_NAT_ADDR=:{{ nat_port }}
     {% endif %}      

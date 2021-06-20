@@ -31,7 +31,12 @@ paths = {
 # WARNING: THIS MUST BE AT LEAST 10 CHARACTERS LONG.
 #          REFER TO https://geth.ethereum.org/docs/getting-started
 clef = {
-    'password': hiveYaml['clef_password']
+    'password': hiveYaml['clef_password'],
+    'location': hiveYaml['clef_location']
+}
+
+goerli = {
+    'location' : hiveYaml['goerli_location']
 }
 
 # Network port settings - let's make it easier to share pollen!
@@ -59,56 +64,64 @@ containers = {
 
 host_pub_ips = hiveYaml['host_pub_ips']
 
-# First let's go through existing Ethereum accounts for the
-# nodes.
-accounts = []
-clef_key_dir = './clef_keys'
-clef_key_p =  clef_key_dir + "/UTC*"
+if containers.clef:
+    # First let's go through existing Ethereum accounts for the
+    # nodes.
+    accounts = []
+    clef_key_dir = './clef_keys'
+    clef_key_p =  clef_key_dir + "/UTC*"
 
-step = 0
-for keyfile in glob.glob( clef_key_p ):
-    step += 1
-    encrypted = open(keyfile).read()
-    decrypted = Account.decrypt(encrypted, clef["password"])
-    acct = Account.from_key( decrypted )
-    pretty_address = acct.address[2:].lower()
-    print( '%d : loaded acct: [%s]' %(step, pretty_address) )
-    accounts.append(acct)
+    step = 0
+    for keyfile in glob.glob( clef_key_p ):
+        step += 1
+        encrypted = open(keyfile).read()
+        decrypted = Account.decrypt(encrypted, clef["password"])
+        acct = Account.from_key( decrypted )
+        pretty_address = acct.address[2:].lower()
+        print( '%d : loaded acct: [%s]' %(step, pretty_address) )
+        accounts.append(acct)
 
-curr_size = len(accounts)
-print ('loaded %d existing accounts' % (curr_size))
+    curr_size = len(accounts)
+    print ('loaded %d existing accounts' % (curr_size))
 
-accounts_f = open("./clef_keys/accounts", 'w')
+    accounts_f = open("./clef_keys/accounts", 'w')
 
-# Second let's create new Ethereum accounts for the
-# nodes.
-if (curr_size < num_nodes):
-    extra_len = num_nodes - curr_size
-    Account.enable_unaudited_hdwallet_features()
-    extra_accounts = [ Account.create() for x in range(extra_len) ]
-    steps = 0
-    for account in extra_accounts:
-        # Encrypt all the node's private keys and store them into clef.
-        # This is why clef's password is required.
-        steps += 1
-        encrypted = account.encrypt(clef['password'])
-        now = datetime.utcnow()
-        pretty_address = account.address[2:].lower()
-        accounts_f.writelines(pretty_address + "\n")
+    # Second let's create new Ethereum accounts for the
+    # nodes.
+    if (curr_size < num_nodes):
+        extra_len = num_nodes - curr_size
+        Account.enable_unaudited_hdwallet_features()
+        extra_accounts = [ Account.create() for x in range(extra_len) ]
+        steps = 0
+        for account in extra_accounts:
+            # Encrypt all the node's private keys and store them into clef.
+            # This is why clef's password is required.
+            steps += 1
+            encrypted = account.encrypt(clef['password'])
+            now = datetime.utcnow()
+            pretty_address = account.address[2:].lower()
+            accounts_f.writelines(pretty_address + "\n")
 
-        file_name = "UTC--{}--{}".format(
-            now.strftime("%Y-%m-%dT%H-%M-%S.%f"),
-            pretty_address
-        )
-        accounts.append(account)
+            file_name = "UTC--{}--{}".format(
+                now.strftime("%Y-%m-%dT%H-%M-%S.%f"),
+                pretty_address
+            )
+            accounts.append(account)
 
-        # Let's save it in a file format hopefully usable by clef
-        with open(clef_key_dir + '/' + file_name, 'w') as f:
-            f.write(json.dumps(encrypted))
-        
-        print('[%d] created new acct: [%s]' % (steps, pretty_address))
-  
-accounts_f.close()
+            # Let's save it in a file format hopefully usable by clef
+            with open(clef_key_dir + '/' + file_name, 'w') as f:
+                f.write(json.dumps(encrypted))
+            
+            print('[%d] created new acct: [%s]' % (steps, pretty_address))
+    
+    accounts_f.close()
+
+if containers.bees:
+    accounts = []
+    with open("./clef_keys/accounts", 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            accounts.append(line)
 
 print('Total accounts loaded: %d ' % (len(accounts)) )
 
@@ -123,8 +136,8 @@ def process(input, output):
     template = env.get_template(input)
 
     rendered = template.render(
-        num_nodes=num_nodes, paths=paths, clef=clef, network=network,
-        versions=versions, accounts=accounts, containers=containers, 
+        num_nodes=num_nodes, paths=paths, clef=clef, goerli=goerli, network=network,
+        versions=versions, accounts=accounts, containers=containers,
         host_pub_ips=host_pub_ips
     )
 
