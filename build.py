@@ -26,6 +26,9 @@ versions = {
     'geth':                 hiveYaml['versions']['geth']
 }
 
+# whether to show the result or not
+tearsheet =                 hiveYaml['tearsheet']
+
 # Where do we keep the sweet honey
 paths = {
     'root':                 hiveYaml['root_path'],
