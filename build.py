@@ -10,6 +10,7 @@ import glob
 
 HIVE_YAML = sys.argv[1]
 HIVE_CONFIG_DIR = os.path.dirname(os.path.abspath(HIVE_YAML))
+HIVE_KEYS_DIR = HIVE_CONFIG_DIR + "/clef_keys"
 HIVE_ACCOUNTS = HIVE_CONFIG_DIR + "/accounts"
 
 with open(HIVE_YAML, 'r') as f:
@@ -71,8 +72,7 @@ if containers.clef:
     # First let's go through existing Ethereum accounts for the
     # nodes.
     accounts = []
-    clef_key_dir = './clef_keys'
-    clef_key_p =  clef_key_dir + "/UTC*"
+    clef_key_p =  HIVE_KEYS_DIR + "/UTC*"
 
     step = 0
     for keyfile in glob.glob( clef_key_p ):
@@ -112,7 +112,7 @@ if containers.clef:
             accounts.append(account)
 
             # Let's save it in a file format hopefully usable by clef
-            with open(clef_key_dir + '/' + file_name, 'w') as f:
+            with open(HIVE_KEYS_DIR + '/' + file_name, 'w') as f:
                 f.write(json.dumps(encrypted))
             
             print('[%d] created new acct: [%s]' % (steps, pretty_address))
