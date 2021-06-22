@@ -197,6 +197,7 @@ services:
       - BEE_WELCOME_MESSAGE
       - BEE_FULL_NODE
       - BEE_TRANSACTION
+      - BEE_MAINNET
     ports:
       - "{{ host_ip }}:{{ api_port }}:1633"
       - "{{ host_ip }}:{{ p2p_port }}:1634"

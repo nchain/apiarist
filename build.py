@@ -44,10 +44,6 @@ clef = {
     'keys_dir':             HIVE_KEYS_DIR   
 }
 
-goerli = {
-    'location' :            hiveYaml['goerli']['location']
-}
-
 # Network port settings - let's make it easier to share pollen!
 network = {
     'base_host_port':       hiveYaml['base_host_port'],
@@ -57,6 +53,7 @@ network = {
     'grafana_port':         hiveYaml['grafana_port'],
     'geth_http_port':       hiveYaml['geth_http_port'],
     'geth_ws_port':         hiveYaml['geth_ws_port'],
+    'swap_endpoint':        hiveYaml['swap_endpoint']
 }
 
 containers = {
@@ -144,7 +141,7 @@ def process(input, output):
     template = env.get_template(input)
 
     rendered = template.render(
-        bee_num=bee_num, paths=paths, clef=clef, goerli=goerli, network=network,
+        bee_num=bee_num, paths=paths, clef=clef, network=network,
         versions=versions, accounts=accounts, containers=containers,
         bee_host_ips=bee_host_ips
     )
