@@ -6,7 +6,7 @@
 bee_num: 61
 versions:
   clef: '0.4.12'
-  bee: '0.6.2'
+  bee: '1.0.0'
   geth: 'v1.10.2'
 root_path: /data/hive
 clef_password: 123456
