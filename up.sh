@@ -16,6 +16,8 @@ pip3 install -r requirements.txt
 HIVE_YAML=$1
 [ -z "$HIVE_YAML" ] && HIVE_YAML="$HOME/.config/swarm/hive.yml"
 [ ! -f "$HIVE_YAML" ] && echo "$HIVE_YAML not found" && exit 1
+clef_keys_dir="$HOME/.config/swarm/clef_keys"
+mkdir -p $clef_keys_dir
 
 python3 build.py $HIVE_YAML
 
